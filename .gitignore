@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pth
+*.pt
+*.pkl
+venv/
+.env
+*.egg-info/
+
+# Data folders (too large)
+model/data/
+*.zip
+*.tar
+*.csv
+
+# Node
+node_modules/
+.env
+dist/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model weights
+model/weights/
