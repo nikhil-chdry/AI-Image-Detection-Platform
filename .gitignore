@@ -27,4 +27,3 @@ Thumbs.db
 .ipynb_checkpoints/
 
 # Model weights
-model/weights/
