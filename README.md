@@ -46,6 +46,6 @@ AI-Image-Detection-Platform/
 Coming soon...
 
 ## 👤 Author
-**Nikhil Chaudhary**
+**Nikhil Choudhary**
 - GitHub: [@nikhil-chdry](https://github.com/nikhil-chdry)
 - LinkedIn: [nikhil-chdry](https://linkedin.com/in/nikhil-chdry)
