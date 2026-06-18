@@ -1,0 +1,32 @@
+MODEL EVALUATION RESULTS
+==================================================
+
+Accuracy:  97.99%
+F1 Score:  98.00%
+Precision: 97.64%
+Recall:    98.36%
+AUC:       99.82%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        REAL       0.98      0.98      0.98     10000
+        FAKE       0.98      0.98      0.98     10000
+
+    accuracy                           0.98     20000
+   macro avg       0.98      0.98      0.98     20000
+weighted avg       0.98      0.98      0.98     20000
+
+
+Comparison with Papers:
+
+    Model                     Accuracy     AUC       
+    -----------------------------------------------
+    Your Model                97.99%        99.82%
+    Paper 4 (Singh et al.)    95.80%       -         
+    Paper 1 LSTM (FF++)       93.50%       96.27%    
+    Paper 1 LSTM (UADFV)      90.45%       94.90%    
+    MesoNet                   84.92%       87.59%    
+    Capsule Network           73.63%       80.61%    
+    LD-CNN                    76.80%       -         
+    
