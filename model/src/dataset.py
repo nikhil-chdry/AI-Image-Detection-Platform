@@ -158,7 +158,7 @@ def get_dataloaders(data_dir, batch_size=32, val_split=0.2):
         train_data,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=2,
+        num_workers=0,
         pin_memory=True  # Faster GPU transfer
     )
     
@@ -166,7 +166,7 @@ def get_dataloaders(data_dir, batch_size=32, val_split=0.2):
         val_data,
         batch_size=batch_size,
         shuffle=False,
-        num_workers=2,
+        num_workers=0,
         pin_memory=True
     )
     
@@ -174,7 +174,7 @@ def get_dataloaders(data_dir, batch_size=32, val_split=0.2):
         test_dataset,
         batch_size=batch_size,
         shuffle=False,
-        num_workers=2,
+        num_workers=0,
         pin_memory=True
     )
     
@@ -202,7 +202,7 @@ if __name__ == "__main__":
     # Get dataloaders
     train_loader, val_loader, test_loader = get_dataloaders(
         data_dir=DATA_DIR,
-        batch_size=32
+        batch_size=64
     )
     
     # Test one batch
