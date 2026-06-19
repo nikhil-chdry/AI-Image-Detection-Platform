@@ -9,6 +9,7 @@ venv/
 # Data folders (too large)
 model/data/
 model/data_v2/
+model/data_v3/
 *.zip
 *.tar
 *.csv
@@ -16,7 +17,7 @@ model/data_v2/
 # Model weights (too large for GitHub)
 model/weights/
 model/weights_v2/
-
+model/weights_v3/
 # Node
 node_modules/
 .env
