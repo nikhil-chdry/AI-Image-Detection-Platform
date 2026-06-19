@@ -1,8 +1,6 @@
 # Python
 __pycache__/
 *.py[cod]
-*.pth
-*.pt
 *.pkl
 venv/
 .env
@@ -10,9 +8,14 @@ venv/
 
 # Data folders (too large)
 model/data/
+model/data_v2/
 *.zip
 *.tar
 *.csv
+
+# Model weights (too large for GitHub)
+model/weights/
+model/weights_v2/
 
 # Node
 node_modules/
@@ -25,5 +28,3 @@ Thumbs.db
 
 # Jupyter
 .ipynb_checkpoints/
-
-# Model weights
