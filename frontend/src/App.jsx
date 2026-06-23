@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import LoadingScreen from './components/LoadingScreen'
 import Home from './pages/Home'
-// import AIDetector from './pages/AIDetector'
+import AIDetector from './pages/AIDetector'
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
       {!loading && (
         <Routes>
           <Route path="/" element={<Home />} />
-          
+          <Route path="/ai-detector" element={<AIDetector />} />
         </Routes>
       )}
     </>
