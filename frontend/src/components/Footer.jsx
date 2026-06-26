@@ -51,7 +51,7 @@ const Footer = () => {
                 cursor: 'default'
               }}
             >
-              NS<span style={{ color: '#CAB588' }}>.</span>
+              NIKHIL SUNDA<span style={{ color: '#CAB588' }}></span>
             </motion.h2>
 
             <p style={{

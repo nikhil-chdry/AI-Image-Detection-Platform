@@ -1,6 +1,9 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ExternalLink, GitFork } from 'lucide-react'
+import amcImage from '../assets/amc.png'
+import liveBazarImage from '../assets/livebazar.png'
+import aiDetectionImage from '../assets/aidetector.png'
 
 const projects = [
   {
@@ -16,7 +19,7 @@ const projects = [
     ],
     github: 'https://github.com/nikhil-chdry/AI-Image-Detection-Platform',
     live: 'https://ai-image-detection-demo.vercel.app',
-    image: '/images/ai-detection-screenshot.png',
+    image: aiDetectionImage,
     featured: true
   },
   {
@@ -31,8 +34,8 @@ const projects = [
       { label: 'Stack', value: 'Full Stack' },
     ],
     github: 'https://github.com/nikhil-chdry/algorithmic-smart-shop',
-    live: 'https://smart-shop-demo.vercel.app',
-    image: '/images/smart-shop-screenshot.png',
+    live: 'https://smart-shop-platform-aaph.vercel.app/',
+    image: liveBazarImage,
     featured: false
   },
   {
@@ -47,8 +50,8 @@ const projects = [
       { label: 'Stack', value: 'MERN' },
     ],
     github: 'https://github.com/nikhil-chdry/water-amc-system',
-    live: 'https://water-amc-demo.vercel.app',
-    image: '/images/water-amc-screenshot.png',
+    live: 'https://water-amc-green.vercel.app/dashboard',
+    image: amcImage,
     featured: false
   },
 ]
