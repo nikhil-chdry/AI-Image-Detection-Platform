@@ -46,12 +46,12 @@ HF_URL = "https://huggingface.co/nikhil-chdry/nikhil-chdry-ai-detector-weights/r
 def download_weights():
     """Download model weights from Hugging Face if not present"""
     if not os.path.exists(WEIGHTS_PATH):
-        print("📥 Downloading model weights from Hugging Face...")
+        print(" Downloading model weights from Hugging Face...")
         os.makedirs(WEIGHTS_DIR, exist_ok=True)
         urllib.request.urlretrieve(HF_URL, WEIGHTS_PATH)
-        print("✅ Weights downloaded successfully!")
+        print(" Weights downloaded successfully!")
     else:
-        print("✅ Weights already exist locally!")
+        print(" Weights already exist locally!")
 
 def load_model(weights_path):
     """Load trained model"""
@@ -63,10 +63,10 @@ def load_model(weights_path):
     return model, checkpoint['val_acc']
 
 # Download and load on startup
-print("🧠 Loading my model...")
+print(" Loading my model...")
 download_weights()
 model_v3, v3_acc = load_model(WEIGHTS_PATH)
-print(f"✅ Model V3 loaded! (Val Acc: {v3_acc:.2f}%) - Human Faces Dataset")
+print(f" Model V3 loaded! (Val Acc: {v3_acc:.2f}%) - Human Faces Dataset")
 
 transform = get_transforms('test')
 
@@ -95,7 +95,7 @@ def predict_image(image: Image.Image, model):
 @app.get("/")
 def root():
     return {
-        "message": "AI Image Detection API 🚀",
+        "message": "AI Image Detection API ",
         "model": f"V3 Human Faces (Val Acc: {v3_acc:.2f}%)",
         "device": str(device)
     }
