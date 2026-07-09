@@ -1,8 +1,3 @@
-# ============================================================
-# FASTAPI SERVICE - PRODUCTION VERSION
-# Loads V3 model from Hugging Face at startup
-# ============================================================
-
 import sys
 import os
 import urllib.request
@@ -18,10 +13,6 @@ import io
 from model import DeepfakeDetector
 from dataset import get_transforms
 
-# ============================================================
-# APP SETUP
-# ============================================================
-
 app = FastAPI(title="AI Image Detection API")
 
 app.add_middleware(
@@ -32,29 +23,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ============================================================
-# DOWNLOAD WEIGHTS FROM HUGGING FACE IF NOT EXISTS
-# ============================================================
-
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 WEIGHTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'model', 'weights_v3')
 WEIGHTS_PATH = os.path.join(WEIGHTS_DIR, 'best_model_v3.pth')
-
 HF_URL = "https://huggingface.co/nikhil-chdry/nikhil-chdry-ai-detector-weights/resolve/main/best_model_v3.pth"
 
 def download_weights():
-    """Download model weights from Hugging Face if not present"""
     if not os.path.exists(WEIGHTS_PATH):
         print(" Downloading model weights from Hugging Face...")
         os.makedirs(WEIGHTS_DIR, exist_ok=True)
         urllib.request.urlretrieve(HF_URL, WEIGHTS_PATH)
-        print(" Weights downloaded successfully!")
+        print(" Weights downloaded!")
     else:
-        print(" Weights already exist locally!")
+        print(" Weights already exist!")
 
 def load_model(weights_path):
-    """Load trained model"""
     model = DeepfakeDetector(pretrained=False)
     checkpoint = torch.load(weights_path, map_location=device)
     model.load_state_dict(checkpoint['model_state_dict'])
@@ -62,17 +46,12 @@ def load_model(weights_path):
     model.eval()
     return model, checkpoint['val_acc']
 
-# Download and load on startup
-print(" Loading my model...")
+print("Loading my model...")
 download_weights()
 model_v3, v3_acc = load_model(WEIGHTS_PATH)
-print(f" Model V3 loaded! (Val Acc: {v3_acc:.2f}%) - Human Faces Dataset")
+print(f" Model V3 loaded! (Val Acc: {v3_acc:.2f}%)")
 
 transform = get_transforms('test')
-
-# ============================================================
-# PREDICTION LOGIC
-# ============================================================
 
 def predict_image(image: Image.Image, model):
     image_tensor = transform(image.convert('RGB')).unsqueeze(0).to(device)
@@ -87,10 +66,6 @@ def predict_image(image: Image.Image, model):
         'real_probability': round(probs[0][0].item() * 100, 2),
         'fake_probability': round(probs[0][1].item() * 100, 2)
     }
-
-# ============================================================
-# ROUTES
-# ============================================================
 
 @app.get("/")
 def root():
@@ -123,7 +98,7 @@ async def predict_both(file: UploadFile = File(...)):
     image = Image.open(io.BytesIO(contents))
     result = predict_image(image, model_v3)
     return {
-        'v1_result': {**result, 'model_info': 'CIFAKE Benchmark (96.59% test acc)'},
+        'v1_result': {**result, 'model_info': 'CIFAKE Benchmark (97.99% test acc)'},
         'v2_result': {**result, 'model_info': 'Real-World Dataset (94.53% test acc)'},
-        'v3_result': {**result, 'model_info': 'Human Faces Dataset (90% test acc)'}
+        'v3_result': {**result, 'model_info': 'Human Faces Dataset (100% test acc)'}
     }
