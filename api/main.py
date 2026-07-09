@@ -123,7 +123,7 @@ async def predict_both(file: UploadFile = File(...)):
     image = Image.open(io.BytesIO(contents))
     result = predict_image(image, model_v3)
     return {
-        'v1_result': {**result, 'model_info': 'CIFAKE Benchmark (97.99% test acc)'},
+        'v1_result': {**result, 'model_info': 'CIFAKE Benchmark (96.59% test acc)'},
         'v2_result': {**result, 'model_info': 'Real-World Dataset (94.53% test acc)'},
-        'v3_result': {**result, 'model_info': 'Human Faces Dataset (100% test acc)'}
+        'v3_result': {**result, 'model_info': 'Human Faces Dataset (90% test acc)'}
     }
