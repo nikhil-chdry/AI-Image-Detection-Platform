@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Mail, ExternalLink } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
   const ref = useRef(null)
@@ -8,14 +9,29 @@ const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [sent, setSent] = useState(false)
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // For now just show success message
-    // Later we can connect to backend
-    setSent(true)
-    setTimeout(() => setSent(false), 4000)
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setSent('loading')
+
+  try {
+    await emailjs.send(
+      'service_0hy8tai',      
+      'template_wz2tfjv',     
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+      },
+      'x00h0KMPJRtltU3PZ'       
+    )
+    setSent('success')
     setFormData({ name: '', email: '', message: '' })
+    setTimeout(() => setSent(false), 5000)
+  } catch (error) {
+    setSent('error')
+    setTimeout(() => setSent(false), 4000)
   }
+}
 
   return (
     <section
@@ -412,26 +428,50 @@ const Contact = () => {
                 </div>
 
                 {/* Submit */}
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  style={{
-                    backgroundColor: sent ? 'rgba(74,222,128,0.1)' : '#CAB588',
-                    color: sent ? '#4ADE80' : '#0A0000',
-                    border: sent ? '1px solid #4ADE80' : 'none',
-                    padding: '16px 32px',
-                    fontSize: '11px',
-                    letterSpacing: '0.25em',
-                    fontFamily: 'Inter, sans-serif',
-                    fontWeight: '500',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    width: '100%'
-                  }}
-                >
-                  {sent ? '✓ MESSAGE SENT' : 'SEND MESSAGE'}
-                </motion.button>
+                 <motion.button
+                   type="submit"
+                   disabled={sent === 'loading'}
+                  whileHover={{ scale: sent === 'loading' ? 1 : 1.02 }}
+                 whileTap={{ scale: sent === 'loading' ? 1 : 0.98 }}
+                    style={{
+                              backgroundColor: sent === 'success'
+                             ? 'rgba(74,222,128,0.1)'
+                            : sent === 'error'
+                          ? 'rgba(248,113,113,0.1)'
+                            : sent === 'loading'
+                          ? 'rgba(202,181,136,0.3)'
+                         : '#CAB588',
+                         color: sent === 'success'
+                         ? '#4ADE80'
+                         : sent === 'error'
+                           ? '#F87171'
+                        : sent === 'loading'
+                        ? 'rgba(202,181,136,0.5)'
+                        : '#0A0000',
+                      border: sent === 'success'
+                        ? '1px solid #4ADE80'
+                        : sent === 'error'
+                        ? '1px solid #F87171'
+                        : 'none',
+                      padding: '16px 32px',
+                      fontSize: '11px',
+                      letterSpacing: '0.25em',
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: '500',
+                      cursor: sent === 'loading' ? 'not-allowed' : 'pointer',
+                      transition: 'all 0.3s ease',
+                      width: '100%'
+                    }}
+                  >
+                    {sent === 'loading'
+                      ? 'SENDING...'
+                      : sent === 'success'
+                      ? '✓ MESSAGE SENT!'
+                      : sent === 'error'
+                      ? '✗ FAILED - TRY AGAIN'
+                      : 'SEND MESSAGE'
+                    }
+                  </motion.button>
               </form>
             </div>
           </motion.div>

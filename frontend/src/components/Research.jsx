@@ -20,7 +20,7 @@ const scrollableItems = [
     type: 'REFERENCED PAPER',
     title: 'Robust Deepfake Detection Against Adversarial Attacks Using Feature Fusion and FGSM Defense',
     journal: 'Singh et al. · AISP 2025 · IEEE',
-    description: 'Primary inspiration for my AI model architecture. Implemented the ResNet50 + XceptionNet feature fusion approach achieving 95.8% accuracy on FaceForensics++. My implementation surpassed this benchmark achieving 97.99% accuracy.',
+    description: 'Primary inspiration for my AI model architecture. Implemented the ResNet50 + XceptionNet feature fusion approach achieving 95.8% accuracy on FaceForensics++. My implementation surpassed this benchmark achieving 96.50% accuracy.',
     tags: ['ResNet50', 'XceptionNet', 'Feature Fusion', 'FGSM', 'Deepfake'],
     icon: FileText
   },
@@ -64,9 +64,9 @@ const scrollableItems = [
     number: '07',
     type: 'CODING PROFILE',
     title: 'LeetCode Problem Solving',
-    journal: 'leetcode.com/u/yourusername',
-    description: 'Active competitive programmer with 500+ problems solved across Easy, Medium, and Hard categories. Strong grasp of data structures, algorithms, dynamic programming, and graph theory. Consistent participation in weekly contests with peak rating of 1850+.',
-    tags: ['DSA', 'Algorithms', 'Dynamic Programming', 'Graphs'],
+    journal: 'leetcode.com/u/nikhil_sunda_skr',
+    description: 'Active competitive programmer with 300+ problems solved across Easy, Medium, and Hard categories. Strong grasp of data structures, algorithms. Consistent participation in weekly contests with peak rating of 1500+.',
+    tags: ['DSA', 'Algorithms', 'Graphs', 'Tree'],
     icon: Code
   },
   {
@@ -74,19 +74,11 @@ const scrollableItems = [
     type: 'CODING PROFILE',
     title: 'GeeksforGeeks Practice',
     journal: 'auth.geeksforgeeks.org/user/yourusername',
-    description: 'Ranked in top 1% of contributors with 400+ articles read and 300+ coding problems solved. Focused on core computer science subjects including operating systems, DBMS, and object-oriented design patterns.',
+    description: '200+ coding score. Focused on core computer science subjects including operating systems, DBMS, and object-oriented design patterns.',
     tags: ['Core CS', 'DBMS', 'OS', 'OOP', 'Problem Solving'],
     icon: Code
   },
-  {
-    number: '09',
-    type: 'CERTIFICATION',
-    title: 'Deep Learning & Computer Vision Masterclass',
-    journal: 'Udemy · 2025',
-    description: 'Advanced certification in computer vision pipelines, OpenCV, YOLO object detection, image segmentation, and GAN architectures. Built end-to-end projects including real-time face detection and autonomous lane detection systems.',
-    tags: ['OpenCV', 'YOLO', 'Computer Vision', 'GAN', 'PyTorch'],
-    icon: Award
-  },
+
 ]
 
 const Research = () => {

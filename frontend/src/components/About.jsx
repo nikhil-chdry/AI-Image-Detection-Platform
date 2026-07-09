@@ -88,7 +88,7 @@ const About = () => {
               {[
                 { number: '9+', label: 'Projects Built' },
                 { number: '2', label: 'Research Paper' },
-                { number: '7.89', label: 'CGPA' },
+                { number: '8.03', label: 'CGPA' },
               ].map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -209,8 +209,8 @@ const About = () => {
                   fontSize: '13px',
                   fontFamily: 'Playfair Display, serif'
                 }}>
-                  7.89
-                </p>
+                  8.03 
+                </p> 
               </div>
             </div>
           </motion.div>

@@ -326,7 +326,7 @@ const Hero = () => {
                 fontFamily: 'Playfair Display, serif',
                 fontWeight: '600'
               }}>
-                7.89
+                8.03
               </p>
             </motion.div>
 

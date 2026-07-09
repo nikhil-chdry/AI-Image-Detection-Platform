@@ -61,20 +61,12 @@ const AIDetector = () => {
 
   return (
     <div style={{
-      backgroundColor: '#0A0000',
+      backgroundColor: '#FFFFFF',
       minHeight: '100vh',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif'
     }}>
-
-      {/* Background gradient */}
-      <div style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'radial-gradient(ellipse at 50% 0%, rgba(80,0,0,0.4) 0%, transparent 60%)',
-        pointerEvents: 'none',
-        zIndex: 0
-      }} />
 
       {/* Navbar */}
       <div style={{
@@ -85,29 +77,31 @@ const AIDetector = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: 'rgba(10,0,0,0.8)',
-        backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(202,181,136,0.1)'
+        backgroundColor: '#FFFFFF',
+        borderBottom: '1px solid rgba(0,0,0,0.06)',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
       }}>
         <Link to="/" style={{ textDecoration: 'none' }}>
           <h1 style={{
-            fontFamily: 'Playfair Display, serif',
+            fontFamily: 'Inter, sans-serif',
             fontSize: '22px',
-            fontWeight: '600',
-            color: '#FEF1E1',
-            letterSpacing: '0.1em'
+            fontWeight: '700',
+            color: '#1a1a1a',
+            letterSpacing: '-0.02em'
           }}>
-            NS<span style={{ color: '#CAB588' }}>.</span>
+            NS<span style={{ color: '#006633' }}>.</span>
           </h1>
         </Link>
 
         <p style={{
-          color: '#CAB588',
+          color: '#666666',
           fontSize: '11px',
-          letterSpacing: '0.3em',
-          fontFamily: 'Inter, sans-serif'
+          letterSpacing: '0.2em',
+          fontFamily: 'Inter, sans-serif',
+          fontWeight: '500',
+          textTransform: 'uppercase'
         }}>
-          AI IMAGE DETECTOR
+          AI Image Detector
         </p>
 
         <Link to="/" style={{ textDecoration: 'none' }}>
@@ -115,16 +109,19 @@ const AIDetector = () => {
             whileHover={{ scale: 1.03 }}
             style={{
               background: 'none',
-              border: '1px solid rgba(202,181,136,0.3)',
-              color: 'rgba(254,241,225,0.6)',
+              border: '1px solid rgba(0,0,0,0.15)',
+              color: '#333333',
               padding: '8px 20px',
-              fontSize: '10px',
-              letterSpacing: '0.2em',
+              fontSize: '11px',
+              letterSpacing: '0.15em',
               fontFamily: 'Inter, sans-serif',
-              cursor: 'pointer'
+              fontWeight: '500',
+              cursor: 'pointer',
+              borderRadius: '4px',
+              textTransform: 'uppercase'
             }}
           >
-            ← BACK
+            ← Back
           </motion.button>
         </Link>
       </div>
@@ -133,8 +130,8 @@ const AIDetector = () => {
       <div style={{
         position: 'relative',
         zIndex: 10,
-        padding: '120px 80px 80px',
-        maxWidth: '1300px',
+        padding: '140px 80px 80px',
+        maxWidth: '1200px',
         margin: '0 auto'
       }}>
 
@@ -143,44 +140,44 @@ const AIDetector = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          style={{ marginBottom: '60px', textAlign: 'center' }}
+          style={{ marginBottom: '60px' }}
         >
           <p style={{
-            color: '#CAB588',
-            fontSize: '11px',
-            letterSpacing: '0.4em',
+            color: '#006633',
+            fontSize: '12px',
+            letterSpacing: '0.15em',
             fontFamily: 'Inter, sans-serif',
-            marginBottom: '16px'
+            fontWeight: '600',
+            marginBottom: '16px',
+            textTransform: 'uppercase'
           }}>
-            POWERED BY RESNET50 + XCEPTIONNET FEATURE FUSION
+            Powered by ResNet50 + XceptionNet Feature Fusion
           </p>
 
           <h1 style={{
-            fontFamily: 'Playfair Display, serif',
-            fontSize: 'clamp(36px, 5vw, 64px)',
-            fontWeight: '600',
-            color: '#FEF1E1',
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 'clamp(40px, 5vw, 64px)',
+            fontWeight: '800',
+            color: '#1a1a1a',
             lineHeight: '1.1',
-            letterSpacing: '-0.02em',
+            letterSpacing: '-0.03em',
             marginBottom: '20px'
           }}>
             Detect AI Generated
             <br />
-            <span style={{ color: '#CAB588' }}>Images Instantly.</span>
+            <span style={{ color: '#006633' }}>Images Instantly.</span>
           </h1>
 
           <p style={{
-            color: 'rgba(254,241,225,0.5)',
-            fontSize: '15px',
+            color: '#555555',
+            fontSize: '16px',
             fontFamily: 'Inter, sans-serif',
-            fontWeight: '300',
+            fontWeight: '400',
             maxWidth: '500px',
-            margin: '0 auto',
             lineHeight: '1.7'
           }}>
             Upload any image and my model will analyze it
-            using 3 specialized models trained on 130K+ images,
-            inspired by 4 IEEE research papers.
+            using 3 specialized models trained on 130K+ images.
           </p>
         </motion.div>
 
@@ -188,7 +185,7 @@ const AIDetector = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '32px',
+          gap: '40px',
           alignItems: 'start'
         }}>
 
@@ -205,12 +202,12 @@ const AIDetector = () => {
               onDragOver={(e) => { e.preventDefault(); setDragging(true) }}
               onDragLeave={() => setDragging(false)}
               style={{
-                border: `1px solid ${dragging
-                  ? '#CAB588'
-                  : 'rgba(202,181,136,0.2)'}`,
+                border: `2px dashed ${dragging
+                  ? '#006633'
+                  : 'rgba(0,0,0,0.12)'}`,
                 backgroundColor: dragging
-                  ? 'rgba(202,181,136,0.05)'
-                  : 'rgba(255,255,255,0.02)',
+                  ? 'rgba(0,102,51,0.03)'
+                  : '#FAFAFA',
                 cursor: preview ? 'default' : 'pointer',
                 transition: 'all 0.3s ease',
                 position: 'relative',
@@ -218,7 +215,8 @@ const AIDetector = () => {
                 minHeight: '400px',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                borderRadius: '8px'
               }}
             >
               {preview ? (
@@ -242,17 +240,20 @@ const AIDetector = () => {
                       position: 'absolute',
                       top: '12px',
                       right: '12px',
-                      backgroundColor: 'rgba(10,0,0,0.8)',
-                      border: '1px solid rgba(202,181,136,0.3)',
-                      color: '#CAB588',
-                      padding: '6px 12px',
-                      fontSize: '10px',
-                      letterSpacing: '0.2em',
+                      backgroundColor: '#FFFFFF',
+                      border: '1px solid rgba(0,0,0,0.12)',
+                      color: '#333333',
+                      padding: '6px 14px',
+                      fontSize: '11px',
+                      letterSpacing: '0.1em',
                       fontFamily: 'Inter, sans-serif',
-                      cursor: 'pointer'
+                      fontWeight: '500',
+                      cursor: 'pointer',
+                      borderRadius: '4px',
+                      textTransform: 'uppercase'
                     }}
                   >
-                    REMOVE
+                    Remove
                   </motion.button>
                 </div>
               ) : (
@@ -262,26 +263,27 @@ const AIDetector = () => {
                     animate={{ y: [0, -8, 0] }}
                     transition={{ duration: 2, repeat: Infinity }}
                     style={{
-                      fontSize: '48px',
-                      marginBottom: '24px'
+                      fontSize: '40px',
+                      marginBottom: '24px',
+                      color: '#006633'
                     }}
                   >
                     ⬆
                   </motion.div>
 
                   <p style={{
-                    color: '#FEF1E1',
+                    color: '#1a1a1a',
                     fontSize: '16px',
                     fontFamily: 'Inter, sans-serif',
-                    fontWeight: '300',
+                    fontWeight: '500',
                     marginBottom: '8px'
                   }}>
                     Drop your image here
                   </p>
 
                   <p style={{
-                    color: 'rgba(254,241,225,0.4)',
-                    fontSize: '12px',
+                    color: '#888888',
+                    fontSize: '13px',
                     fontFamily: 'Inter, sans-serif',
                     marginBottom: '24px'
                   }}>
@@ -289,10 +291,12 @@ const AIDetector = () => {
                   </p>
 
                   <p style={{
-                    color: 'rgba(202,181,136,0.5)',
+                    color: '#999999',
                     fontSize: '11px',
-                    letterSpacing: '0.2em',
-                    fontFamily: 'Inter, sans-serif'
+                    letterSpacing: '0.1em',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: '500',
+                    textTransform: 'uppercase'
                   }}>
                     JPG · PNG · JPEG · WEBP
                   </p>
@@ -317,29 +321,32 @@ const AIDetector = () => {
               whileTap={image && !loading ? { scale: 0.98 } : {}}
               style={{
                 width: '100%',
-                marginTop: '16px',
-                backgroundColor: image && !loading ? '#CAB588' : 'rgba(202,181,136,0.1)',
-                color: image && !loading ? '#0A0000' : 'rgba(202,181,136,0.3)',
+                marginTop: '20px',
+                backgroundColor: image && !loading ? '#006633' : 'rgba(0,102,51,0.15)',
+                color: image && !loading ? '#FFFFFF' : 'rgba(0,102,51,0.4)',
                 border: 'none',
                 padding: '18px',
-                fontSize: '12px',
-                letterSpacing: '0.3em',
+                fontSize: '13px',
+                letterSpacing: '0.15em',
                 fontFamily: 'Inter, sans-serif',
-                fontWeight: '500',
+                fontWeight: '600',
                 cursor: image && !loading ? 'pointer' : 'not-allowed',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
+                borderRadius: '6px',
+                textTransform: 'uppercase'
               }}
             >
-              {loading ? 'ANALYZING...' : 'ANALYZE IMAGE'}
+              {loading ? 'Analyzing...' : 'Analyze Image'}
             </motion.button>
 
             {/* Loading bar */}
             {loading && (
               <div style={{
-                marginTop: '8px',
-                height: '2px',
-                backgroundColor: 'rgba(202,181,136,0.1)',
-                overflow: 'hidden'
+                marginTop: '12px',
+                height: '3px',
+                backgroundColor: 'rgba(0,102,51,0.1)',
+                overflow: 'hidden',
+                borderRadius: '2px'
               }}>
                 <motion.div
                   animate={{ x: ['-100%', '100%'] }}
@@ -347,7 +354,8 @@ const AIDetector = () => {
                   style={{
                     height: '100%',
                     width: '50%',
-                    backgroundColor: '#CAB588'
+                    backgroundColor: '#006633',
+                    borderRadius: '2px'
                   }}
                 />
               </div>
@@ -360,10 +368,11 @@ const AIDetector = () => {
                 animate={{ opacity: 1 }}
                 style={{
                   marginTop: '12px',
-                  color: '#F87171',
-                  fontSize: '12px',
+                  color: '#dc2626',
+                  fontSize: '13px',
                   fontFamily: 'Inter, sans-serif',
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  fontWeight: '500'
                 }}
               >
                 {error}
@@ -386,35 +395,37 @@ const AIDetector = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   style={{
-                    border: '1px solid rgba(202,181,136,0.1)',
-                    backgroundColor: 'rgba(255,255,255,0.01)',
+                    border: '1px solid rgba(0,0,0,0.08)',
+                    backgroundColor: '#FAFAFA',
                     minHeight: '400px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
                     padding: '60px 40px',
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    borderRadius: '8px'
                   }}
                 >
                   <div style={{
                     width: '60px',
                     height: '60px',
-                    border: '1px solid rgba(202,181,136,0.2)',
+                    border: '1px solid rgba(0,0,0,0.1)',
                     borderRadius: '50%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    marginBottom: '24px'
+                    marginBottom: '24px',
+                    backgroundColor: '#FFFFFF'
                   }}>
                     <span style={{ fontSize: '24px' }}>🔍</span>
                   </div>
 
                   <p style={{
-                    color: 'rgba(254,241,225,0.4)',
-                    fontSize: '14px',
+                    color: '#888888',
+                    fontSize: '15px',
                     fontFamily: 'Inter, sans-serif',
-                    fontWeight: '300',
+                    fontWeight: '400',
                     lineHeight: '1.7'
                   }}>
                     Upload an image and click
@@ -429,34 +440,37 @@ const AIDetector = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+                  style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
                 >
                   {/* Primary Result */}
                   <div style={{
                     border: `1px solid ${result.v3_result.label === 'REAL'
-                      ? 'rgba(74,222,128,0.4)'
-                      : 'rgba(248,113,113,0.4)'}`,
+                      ? 'rgba(0,102,51,0.2)'
+                      : 'rgba(220,38,38,0.2)'}`,
                     backgroundColor: result.v3_result.label === 'REAL'
-                      ? 'rgba(74,222,128,0.05)'
-                      : 'rgba(248,113,113,0.05)',
-                    padding: '40px'
+                      ? 'rgba(0,102,51,0.03)'
+                      : 'rgba(220,38,38,0.03)',
+                    padding: '40px',
+                    borderRadius: '8px'
                   }}>
                     <p style={{
-                      color: '#CAB588',
-                      fontSize: '10px',
-                      letterSpacing: '0.3em',
+                      color: '#666666',
+                      fontSize: '11px',
+                      letterSpacing: '0.15em',
                       fontFamily: 'Inter, sans-serif',
-                      marginBottom: '16px'
+                      fontWeight: '600',
+                      marginBottom: '16px',
+                      textTransform: 'uppercase'
                     }}>
-                      PRIMARY VERDICT
+                      Primary Verdict
                     </p>
 
                     <h2 style={{
-                      fontFamily: 'Playfair Display, serif',
-                      fontSize: '56px',
-                      fontWeight: '600',
-                      color: result.v3_result.label === 'REAL' ? '#4ADE80' : '#F87171',
-                      letterSpacing: '-0.02em',
+                      fontFamily: 'Inter, sans-serif',
+                      fontSize: '48px',
+                      fontWeight: '800',
+                      color: result.v3_result.label === 'REAL' ? '#006633' : '#dc2626',
+                      letterSpacing: '-0.03em',
                       lineHeight: 1,
                       marginBottom: '8px'
                     }}>
@@ -464,17 +478,17 @@ const AIDetector = () => {
                     </h2>
 
                     <p style={{
-                      color: 'rgba(254,241,225,0.5)',
-                      fontSize: '14px',
+                      color: '#666666',
+                      fontSize: '15px',
                       fontFamily: 'Inter, sans-serif',
-                      fontWeight: '300',
-                      marginBottom: '24px'
+                      fontWeight: '400',
+                      marginBottom: '28px'
                     }}>
                       {result.v3_result.confidence}% confidence
                     </p>
 
                     {/* Probability bars */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       {/* Real bar */}
                       <div>
                         <div style={{
@@ -483,25 +497,28 @@ const AIDetector = () => {
                           marginBottom: '6px'
                         }}>
                           <span style={{
-                            color: 'rgba(254,241,225,0.5)',
+                            color: '#555555',
                             fontSize: '11px',
-                            letterSpacing: '0.2em',
-                            fontFamily: 'Inter, sans-serif'
+                            letterSpacing: '0.1em',
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: '600',
+                            textTransform: 'uppercase'
                           }}>
-                            REAL
+                            Real
                           </span>
                           <span style={{
-                            color: '#4ADE80',
-                            fontSize: '11px',
-                            fontFamily: 'Inter, sans-serif'
+                            color: '#006633',
+                            fontSize: '12px',
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: '600'
                           }}>
                             {result.v3_result.real_probability}%
                           </span>
                         </div>
                         <div style={{
-                          height: '4px',
-                          backgroundColor: 'rgba(255,255,255,0.05)',
-                          borderRadius: '2px',
+                          height: '6px',
+                          backgroundColor: 'rgba(0,0,0,0.06)',
+                          borderRadius: '3px',
                           overflow: 'hidden'
                         }}>
                           <motion.div
@@ -510,8 +527,8 @@ const AIDetector = () => {
                             transition={{ duration: 1, delay: 0.3 }}
                             style={{
                               height: '100%',
-                              backgroundColor: '#4ADE80',
-                              borderRadius: '2px'
+                              backgroundColor: '#006633',
+                              borderRadius: '3px'
                             }}
                           />
                         </div>
@@ -525,25 +542,28 @@ const AIDetector = () => {
                           marginBottom: '6px'
                         }}>
                           <span style={{
-                            color: 'rgba(254,241,225,0.5)',
+                            color: '#555555',
                             fontSize: '11px',
-                            letterSpacing: '0.2em',
-                            fontFamily: 'Inter, sans-serif'
+                            letterSpacing: '0.1em',
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: '600',
+                            textTransform: 'uppercase'
                           }}>
-                            AI GENERATED
+                            AI Generated
                           </span>
                           <span style={{
-                            color: '#F87171',
-                            fontSize: '11px',
-                            fontFamily: 'Inter, sans-serif'
+                            color: '#dc2626',
+                            fontSize: '12px',
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: '600'
                           }}>
                             {result.v3_result.fake_probability}%
                           </span>
                         </div>
                         <div style={{
-                          height: '4px',
-                          backgroundColor: 'rgba(255,255,255,0.05)',
-                          borderRadius: '2px',
+                          height: '6px',
+                          backgroundColor: 'rgba(0,0,0,0.06)',
+                          borderRadius: '3px',
                           overflow: 'hidden'
                         }}>
                           <motion.div
@@ -552,8 +572,8 @@ const AIDetector = () => {
                             transition={{ duration: 1, delay: 0.5 }}
                             style={{
                               height: '100%',
-                              backgroundColor: '#F87171',
-                              borderRadius: '2px'
+                              backgroundColor: '#dc2626',
+                              borderRadius: '3px'
                             }}
                           />
                         </div>
@@ -563,18 +583,21 @@ const AIDetector = () => {
 
                   {/* All 3 Models Comparison */}
                   <div style={{
-                    border: '1px solid rgba(202,181,136,0.1)',
-                    backgroundColor: 'rgba(255,255,255,0.02)',
-                    padding: '32px'
+                    border: '1px solid rgba(0,0,0,0.08)',
+                    backgroundColor: '#FAFAFA',
+                    padding: '32px',
+                    borderRadius: '8px'
                   }}>
                     <p style={{
-                      color: '#CAB588',
-                      fontSize: '10px',
-                      letterSpacing: '0.3em',
+                      color: '#666666',
+                      fontSize: '11px',
+                      letterSpacing: '0.15em',
                       fontFamily: 'Inter, sans-serif',
-                      marginBottom: '20px'
+                      fontWeight: '600',
+                      marginBottom: '20px',
+                      textTransform: 'uppercase'
                     }}>
-                      ALL MODELS COMPARISON
+                      All Models Comparison
                     </p>
 
                     <div style={{
@@ -585,7 +608,7 @@ const AIDetector = () => {
                       {[
                         {
                           label: 'V1 — CIFAKE Benchmark',
-                          accuracy: '97.99%',
+                          accuracy: '96.50%',
                           result: result.v1_result
                         },
                         {
@@ -595,7 +618,7 @@ const AIDetector = () => {
                         },
                         {
                           label: 'V3 — Human Faces',
-                          accuracy: '100%',
+                          accuracy: '90%',
                           result: result.v3_result
                         },
                       ].map((model) => (
@@ -605,25 +628,28 @@ const AIDetector = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            padding: '14px 16px',
-                            backgroundColor: 'rgba(255,255,255,0.02)',
-                            border: '1px solid rgba(202,181,136,0.08)'
+                            padding: '16px 18px',
+                            backgroundColor: '#FFFFFF',
+                            border: '1px solid rgba(0,0,0,0.06)',
+                            borderRadius: '6px'
                           }}
                         >
                           <div>
                             <p style={{
-                              color: 'rgba(254,241,225,0.7)',
-                              fontSize: '12px',
+                              color: '#1a1a1a',
+                              fontSize: '13px',
                               fontFamily: 'Inter, sans-serif',
+                              fontWeight: '500',
                               marginBottom: '2px'
                             }}>
                               {model.label}
                             </p>
                             <p style={{
-                              color: 'rgba(202,181,136,0.4)',
-                              fontSize: '10px',
-                              letterSpacing: '0.1em',
-                              fontFamily: 'Inter, sans-serif'
+                              color: '#888888',
+                              fontSize: '11px',
+                              letterSpacing: '0.05em',
+                              fontFamily: 'Inter, sans-serif',
+                              fontWeight: '400'
                             }}>
                               Test Acc: {model.accuracy}
                             </p>
@@ -631,18 +657,19 @@ const AIDetector = () => {
 
                           <div style={{ textAlign: 'right' }}>
                             <p style={{
-                              color: model.result.label === 'REAL' ? '#4ADE80' : '#F87171',
+                              color: model.result.label === 'REAL' ? '#006633' : '#dc2626',
                               fontSize: '14px',
-                              fontFamily: 'Playfair Display, serif',
-                              fontWeight: '600',
+                              fontFamily: 'Inter, sans-serif',
+                              fontWeight: '700',
                               marginBottom: '2px'
                             }}>
                               {model.result.label}
                             </p>
                             <p style={{
-                              color: 'rgba(254,241,225,0.4)',
-                              fontSize: '11px',
-                              fontFamily: 'Inter, sans-serif'
+                              color: '#888888',
+                              fontSize: '12px',
+                              fontFamily: 'Inter, sans-serif',
+                              fontWeight: '500'
                             }}>
                               {model.result.confidence}%
                             </p>
@@ -654,21 +681,22 @@ const AIDetector = () => {
 
                   {/* Model Info */}
                   <div style={{
-                    border: '1px solid rgba(202,181,136,0.1)',
-                    backgroundColor: 'rgba(255,255,255,0.02)',
-                    padding: '24px 32px'
+                    border: '1px solid rgba(0,0,0,0.08)',
+                    backgroundColor: '#FAFAFA',
+                    padding: '24px 32px',
+                    borderRadius: '8px'
                   }}>
                     <p style={{
-                      color: 'rgba(254,241,225,0.4)',
-                      fontSize: '12px',
+                      color: '#666666',
+                      fontSize: '13px',
                       fontFamily: 'Inter, sans-serif',
-                      fontWeight: '300',
-                      lineHeight: '1.6'
+                      fontWeight: '400',
+                      lineHeight: '1.7'
                     }}>
                       Analyzed using ResNet50 + XceptionNet
-                      Feature Fusion inspired by 4 IEEE research papers.
+                      feature fusion model trained on 130K+ images.
                       Primary verdict from V3 Human Faces model
-                      (100% test accuracy on human face dataset).
+                      (90% test accuracy on human face dataset).
                     </p>
                   </div>
 
@@ -680,25 +708,28 @@ const AIDetector = () => {
                     style={{
                       width: '100%',
                       backgroundColor: 'transparent',
-                      border: '1px solid rgba(202,181,136,0.3)',
-                      color: 'rgba(202,181,136,0.7)',
-                      padding: '14px',
-                      fontSize: '11px',
-                      letterSpacing: '0.3em',
+                      border: '1px solid rgba(0,0,0,0.15)',
+                      color: '#333333',
+                      padding: '16px',
+                      fontSize: '12px',
+                      letterSpacing: '0.15em',
                       fontFamily: 'Inter, sans-serif',
+                      fontWeight: '600',
                       cursor: 'pointer',
-                      transition: 'all 0.3s'
+                      transition: 'all 0.3s',
+                      borderRadius: '6px',
+                      textTransform: 'uppercase'
                     }}
                     onMouseEnter={e => {
-                      e.currentTarget.style.borderColor = '#CAB588'
-                      e.currentTarget.style.color = '#CAB588'
+                      e.currentTarget.style.borderColor = '#006633'
+                      e.currentTarget.style.color = '#006633'
                     }}
                     onMouseLeave={e => {
-                      e.currentTarget.style.borderColor = 'rgba(202,181,136,0.3)'
-                      e.currentTarget.style.color = 'rgba(202,181,136,0.7)'
+                      e.currentTarget.style.borderColor = 'rgba(0,0,0,0.15)'
+                      e.currentTarget.style.color = '#333333'
                     }}
                   >
-                    TRY ANOTHER IMAGE
+                    Try Another Image
                   </motion.button>
                 </motion.div>
               )}
@@ -712,44 +743,49 @@ const AIDetector = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           style={{
-            marginTop: '60px',
+            marginTop: '80px',
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '2px',
-            backgroundColor: 'rgba(202,181,136,0.08)',
-            border: '1px solid rgba(202,181,136,0.08)'
+            gap: '1px',
+            backgroundColor: 'rgba(0,0,0,0.08)',
+            border: '1px solid rgba(0,0,0,0.08)',
+            borderRadius: '8px',
+            overflow: 'hidden'
           }}
         >
           {[
-            { value: '97.99%', label: 'CIFAKE Accuracy' },
-            { value: '99.82%', label: 'AUC Score' },
+            { value: '96.50%', label: 'CIFAKE Accuracy' },
+            { value: '90%', label: 'AUC Score' },
             { value: '130K+', label: 'Training Images' },
             { value: '4', label: 'IEEE Papers' },
           ].map((stat) => (
             <div
               key={stat.label}
               style={{
-                backgroundColor: '#0A0000',
-                padding: '32px',
+                backgroundColor: '#FFFFFF',
+                padding: '40px 32px',
                 textAlign: 'center'
               }}
             >
               <p style={{
-                fontFamily: 'Playfair Display, serif',
-                fontSize: '36px',
-                color: '#CAB588',
-                fontWeight: '600',
-                marginBottom: '8px'
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '32px',
+                color: '#006633',
+                fontWeight: '800',
+                marginBottom: '8px',
+                letterSpacing: '-0.02em'
               }}>
                 {stat.value}
               </p>
               <p style={{
-                color: 'rgba(254,241,225,0.4)',
-                fontSize: '10px',
-                letterSpacing: '0.25em',
-                fontFamily: 'Inter, sans-serif'
+                color: '#888888',
+                fontSize: '11px',
+                letterSpacing: '0.1em',
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: '500',
+                textTransform: 'uppercase'
               }}>
-                {stat.label.toUpperCase()}
+                {stat.label}
               </p>
             </div>
           ))}

@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { ExternalLink, GitFork } from 'lucide-react'
 import amcImage from '../assets/amc.png'
 import liveBazarImage from '../assets/livebazar.png'
-import aiDetectionImage from '../assets/aidetector.png'
+import aidetect from '../assets/aidetect.png'
 
 const projects = [
   {
@@ -19,7 +19,7 @@ const projects = [
     ],
     github: 'https://github.com/nikhil-chdry/AI-Image-Detection-Platform',
     live: 'https://ai-image-detection-demo.vercel.app',
-    image: aiDetectionImage,
+    image: aidetect,
     featured: true
   },
   {
