@@ -43,6 +43,8 @@ def load_model(weights_path):
     checkpoint = torch.load(weights_path, map_location=device)
     model.load_state_dict(checkpoint['model_state_dict'])
     model = model.to(device)
+    # Convert to half precision to save memory
+    model = model.half()
     model.eval()
     return model, checkpoint['val_acc']
 
@@ -55,6 +57,8 @@ transform = get_transforms('test')
 
 def predict_image(image: Image.Image, model):
     image_tensor = transform(image.convert('RGB')).unsqueeze(0).to(device)
+    # Convert input to half precision
+    image_tensor = image_tensor.half()
     with torch.no_grad():
         output = model(image_tensor)
         probs = torch.softmax(output, dim=1)
