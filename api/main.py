@@ -43,9 +43,14 @@ def load_model(weights_path):
     checkpoint = torch.load(weights_path, map_location=device)
     model.load_state_dict(checkpoint['model_state_dict'])
     model = model.to(device)
-    # Convert to half precision to save memory
-    model = model.half()
     model.eval()
+    
+    # Quantize to reduce memory by 75%
+    model = torch.quantization.quantize_dynamic(
+        model,
+        {torch.nn.Linear},
+        dtype=torch.qint8
+    )
     return model, checkpoint['val_acc']
 
 print("Loading my model...")
@@ -57,11 +62,9 @@ transform = get_transforms('test')
 
 def predict_image(image: Image.Image, model):
     image_tensor = transform(image.convert('RGB')).unsqueeze(0).to(device)
-    # Convert input to half precision
-    image_tensor = image_tensor.half()
     with torch.no_grad():
         output = model(image_tensor)
-        probs = torch.softmax(output, dim=1)
+        probs = torch.softmax(output.float(), dim=1)
         confidence, prediction = torch.max(probs, dim=1)
     label = 'FAKE' if prediction.item() == 1 else 'REAL'
     return {
