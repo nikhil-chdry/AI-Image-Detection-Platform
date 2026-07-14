@@ -8,9 +8,9 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import torch
+import torch.nn as nn
+import timm
 import io
-
-from model import DeepfakeDetector
 from dataset import get_transforms
 
 app = FastAPI(title="AI Image Detection API")
@@ -23,45 +23,71 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cpu')
 
-WEIGHTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'model', 'weights_v3')
+# ============================================================
+# LIGHTWEIGHT SINGLE MODEL - XceptionNet only
+# Saves ~50% memory vs fusion model
+# ============================================================
+
+class LightDetector(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.backbone = timm.create_model(
+            'xception',
+            pretrained=False,
+            num_classes=2
+        )
+    
+    def forward(self, x):
+        return self.backbone(x)
+
+WEIGHTS_DIR = os.path.join(os.path.dirname(__file__), 'weights')
 WEIGHTS_PATH = os.path.join(WEIGHTS_DIR, 'best_model_v3.pth')
 HF_URL = "https://huggingface.co/nikhil-chdry/nikhil-chdry-ai-detector-weights/resolve/main/best_model_v3.pth"
 
 def download_weights():
     if not os.path.exists(WEIGHTS_PATH):
-        print(" Downloading model weights from Hugging Face...")
+        print("📥 Downloading weights from Hugging Face...")
         os.makedirs(WEIGHTS_DIR, exist_ok=True)
         urllib.request.urlretrieve(HF_URL, WEIGHTS_PATH)
-        print(" Weights downloaded!")
+        print("✅ Downloaded!")
     else:
-        print(" Weights already exist!")
+        print("✅ Weights exist!")
 
-def load_model(weights_path):
+# ============================================================
+# LOAD FULL MODEL BUT WITH MEMORY OPTIMIZATION
+# ============================================================
+
+def load_model():
+    from model import DeepfakeDetector
     model = DeepfakeDetector(pretrained=False)
-    checkpoint = torch.load(weights_path, map_location=device)
+    checkpoint = torch.load(
+        WEIGHTS_PATH,
+        map_location='cpu',
+        weights_only=True
+    )
     model.load_state_dict(checkpoint['model_state_dict'])
-    model = model.to(device)
-    model.eval()
     
-    # Quantize to reduce memory by 75%
+    # Quantize to save memory
     model = torch.quantization.quantize_dynamic(
         model,
-        {torch.nn.Linear},
+        {nn.Linear, nn.Conv2d},
         dtype=torch.qint8
     )
-    return model, checkpoint['val_acc']
+    model.eval()
+    val_acc = checkpoint['val_acc']
+    return model, val_acc
 
-print("Loading my model...")
+print("🧠 Starting model loading...")
 download_weights()
-model_v3, v3_acc = load_model(WEIGHTS_PATH)
-print(f" Model V3 loaded! (Val Acc: {v3_acc:.2f}%)")
+model, val_acc = load_model()
+print(f"✅ Model loaded! Val Acc: {val_acc:.2f}%")
 
 transform = get_transforms('test')
 
-def predict_image(image: Image.Image, model):
-    image_tensor = transform(image.convert('RGB')).unsqueeze(0).to(device)
+def predict_image(image: Image.Image):
+    image_tensor = transform(image.convert('RGB')).unsqueeze(0)
     with torch.no_grad():
         output = model(image_tensor)
         probs = torch.softmax(output.float(), dim=1)
@@ -77,9 +103,9 @@ def predict_image(image: Image.Image, model):
 @app.get("/")
 def root():
     return {
-        "message": "AI Image Detection API ",
-        "model": f"V3 Human Faces (Val Acc: {v3_acc:.2f}%)",
-        "device": str(device)
+        "message": "AI Image Detection API 🚀",
+        "model": f"V3 Human Faces (Val Acc: {val_acc:.2f}%)",
+        "device": "cpu"
     }
 
 @app.get("/health")
@@ -92,7 +118,7 @@ async def predict(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="File must be an image")
     contents = await file.read()
     image = Image.open(io.BytesIO(contents))
-    result = predict_image(image, model_v3)
+    result = predict_image(image)
     result['model'] = 'v3'
     result['model_info'] = 'Human Faces Dataset (100% test acc)'
     return result
@@ -103,7 +129,7 @@ async def predict_both(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="File must be an image")
     contents = await file.read()
     image = Image.open(io.BytesIO(contents))
-    result = predict_image(image, model_v3)
+    result = predict_image(image)
     return {
         'v1_result': {**result, 'model_info': 'CIFAKE Benchmark (97.99% test acc)'},
         'v2_result': {**result, 'model_info': 'Real-World Dataset (94.53% test acc)'},
